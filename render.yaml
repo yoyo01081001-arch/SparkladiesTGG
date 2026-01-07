@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: my-n8n-bot  # SparksBaby
+    env: docker
+    plan: free  # 【核心】锁定免费计划
+    dockerfilePath: Dockerfile
+    dockerContext: https://github.com/n8nio/n8n.git#master
+    dockerCommand: ./docker-entrypoint.sh
+    envVars:
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: true
+      - key: N8N_BASIC_AUTH_USER
+        value: admin  # Uyosync
+      - key: N8N_BASIC_AUTH_PASSWORD
+        sync: false   # 这个设置会让Render在下一步提示你输入密码，更安全
+    domains:
+      - n8n-bot.onrender.com  # 自动生成的免费域名，可运行后自定义
